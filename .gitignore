@@ -1,0 +1,39 @@
+*.log
+.DS_Store
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+/.fleet
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/auth.json
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+Homestead.json
+Homestead.yaml
+Thumbs.db
+
+# Composer
+composer.json
+
+# Docker
+docker-compose.yaml
+
+# Testing & Code Coverage
+coverage/
+test-reports/
+
+# Editor & System
+*.swp
+*~
+.php-cs-fixer.cache
