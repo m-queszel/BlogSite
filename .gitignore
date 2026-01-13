@@ -27,6 +27,9 @@ Thumbs.db
 coverage/
 test-reports/
 
+composer.lock
+package-lock.json
+
 # Editor & System
 *.swp
 *~
