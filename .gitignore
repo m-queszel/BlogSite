@@ -23,12 +23,6 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 
-# Composer
-composer.json
-
-# Docker
-docker-compose.yaml
-
 # Testing & Code Coverage
 coverage/
 test-reports/
