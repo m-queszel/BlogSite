@@ -1,1 +1,4 @@
-<button type="submit" class="cursor-pointer  hover:bg-orange-600  rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500">Save</button>
+<div class="mt-6 flex items-center justify-end gap-x-6 text-lg">
+    <a href="/" class="font-semibold text-white hover:text-orange-500">Cancel</a>
+    <button type="submit" class="cursor-pointer  hover:bg-orange-600  rounded-md bg-orange-500 px-3 py-2 font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500">{{ $slot  }}</button>
+</div>

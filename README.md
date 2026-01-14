@@ -6,7 +6,7 @@ After cloning the repository, start the docker containers by running
 3) Setup the environment (copy the example environment file and generate the application key): `docker-composer exec app cp.env.example .env` `docker-compose exec app php artisan key:generate`
 4) Configure the database using the information in the .env file (this information will not be pulled from the repository
 5) Run the migrations: `docker-compose exec app php artisan migrate`
-6)Build the frontend assets: `docker-compose exec app npm install` `docker-compose exec app npm run build`
+6) Build the frontend assets: `docker-compose exec app npm install` `docker-compose exec app npm run build`
 
 You can now access via http://localhost:8080
 

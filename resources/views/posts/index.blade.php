@@ -1,3 +1,7 @@
 <x-layout>
-    <x-blogcard title="test" author="John" body="Test"/>
+    <div class="grid grid-cols-3 gap-4">
+    @foreach ($posts as $post)
+            <x-blogcard :$post/>
+    @endforeach
+    </div>
 </x-layout>

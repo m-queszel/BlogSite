@@ -14,12 +14,22 @@
         <a href="/" class="text-4xl text-center font-bold  hover:text-orange-500">Awesome Blog Site</a>
 
         <x-header-anchor href="/posts/create" class="text-2xl"> Create a Post</x-header-anchor>
-
+        @auth   
+            <div class="space-x-6">
+                <form method="POST" action="/logout">
+                    @csrf
+                    @method('DELETE')
+                    <button class="text-2xl cursor-pointer hover:text-orange-500">Logout</button>
+                </form>
+            </div>
+        @endauth
+        @guest
+            
         <nav class="flex gap-4">
-            <x-header-anchor href="#">First</x-header-anchor>
-            <x-header-anchor href="#">Second</x-header-anchor>
-            <x-header-anchor href="#">Third</x-header-anchor>
+            <x-header-anchor href="/register">Register</x-header-anchor>
+            <x-header-anchor href="/login">Login</x-header-anchor>
         </nav>
+        @endguest
     </div>
     <main class="mt-8">
         {{ $slot }}
