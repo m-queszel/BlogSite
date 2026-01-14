@@ -15,6 +15,8 @@ services:
       DB_DATABASE: blogsite_db
       DB_USERNAME: laravel
       DB_PASSWORD: laravel
+    networks:
+      - net
 
   db:
     image: mysql:8.0
@@ -29,6 +31,24 @@ services:
       - "3306:3306"
     volumes:
       - dbdata:/var/lib/mysql
+    networks:
+      - net
+
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: blogsite_phpmyadmin
+      restart: always
+      ports:
+        - "8081:80"
+      environment:
+        PMA_HOST: db
+        PMA_USER: laravel
+        PMA_PASSWORD: laravel
+      networks:
+        - net
+
+networks:
+  net:
 
 volumes:
   dbdata:
