@@ -1,5 +1,7 @@
 <x-layout>
-    <x-forms.form action="/posts/{{ $post->id }}" method="PATCH">
+    <x-forms.form action="/posts/{{ $post->id }}" method="POST">
+        @csrf
+        @method("PATCH")
         <div class="space-y-12">
             <div class="border-b border-white/10 pb-12">
                 <x-forms.title>Editing: {{ $post->title }}</x-forms.title>
@@ -19,9 +21,21 @@
                     </div>
                 </fieldset>
             </div>
-            <x-forms.submit-button>Make Changes</x-forms.submit-button>
+            <div class="flex justify-between">
+                <div>
+                    <x-forms.delete-button>Delete Post</x-forms.delete-button>
+                </div>
+                <div>
+                    <x-forms.submit-button>Make Changes</x-forms.submit-button>
+                </div>
+
+            </div>
         </div>
 
     </x-forms.form>
+    <form method="POST" id="delete-form" action="/posts/{{$post->id}} class="hidden">
+        @csrf
+        @method("DELETE")
+    </form>
 </x-layout>
 

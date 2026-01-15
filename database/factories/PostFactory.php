@@ -21,6 +21,7 @@ class PostFactory extends Factory
             'user_id' => User::factory(),
             'title' => fake()->word(),
             'body' => fake()->paragraph(),
+            'notify' => rand(0, 1)
         ];
     }
 }

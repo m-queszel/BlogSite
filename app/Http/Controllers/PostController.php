@@ -18,11 +18,14 @@ class PostController extends Controller
         return view('posts.create', []);
     }
 
-    public function store(Request $request){
-        $attributes = $request->validate([
+    public function store(){
+
+        $attributes = request()->validate([
             'title' => ['required', 'max:255'],
-            'body' => ['required', 'max:255']
+            'body' => ['required', 'max:255'],
+            'notify' => ['required', 'bool']
         ]);
+
         Auth::user()->posts()->create($attributes);
         return redirect()->route('home');
     }
@@ -36,8 +39,7 @@ class PostController extends Controller
         return view('posts.edit', ['post' => $post]);
     }
 
-    public function update(Request $request, Post $post){
-        dd($request->all());
+    public function update(Post $post){
         request()->validate([
             'title' => ['required', 'min:3', 'max:50'],
             'body' => ['required', 'max:255'],
@@ -47,5 +49,11 @@ class PostController extends Controller
             'body' => request('body')
         ]);
         return redirect('/posts/' . $post->id);
+    }
+    
+    public function destroy(Post $post){
+        auth()->user()->can('delete', $post);
+        $post->delete();
+        return redirect(route('home'));
     }
 }
