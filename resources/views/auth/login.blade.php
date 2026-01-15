@@ -3,9 +3,9 @@
     <x-forms.form method="POST" action="/login">
 
         <x-forms.title>Email</x-forms.title>
-        <x-forms.input name="email" type="email"/>
+        <x-forms.input name="email" type="email" value="{{ old('email') }}"/>
         <x-forms.title>Password</x-forms.title>
-        <x-forms.input name="password" type="password"/>
+        <x-forms.input name="password" type="password" value=""/>
 
         <x-forms.divider/>
 

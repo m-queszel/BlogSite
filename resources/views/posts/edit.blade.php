@@ -1,13 +1,11 @@
 <x-layout>
-    <x-forms.form action="/posts" method="POST">
+    <x-forms.form action="/posts/{{ $post->id }}" method="PATCH">
         <div class="space-y-12">
-
             <div class="border-b border-white/10 pb-12">
-                <x-forms.title>Post Creation:</x-forms.title>
-                <p class="mt-1 text-lg text-gray-400">This information will be displayed publicly so be careful what you share.</p>
+                <x-forms.title>Editing: {{ $post->title }}</x-forms.title>
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <x-forms.input name="title" value="">Title</x-forms.input>
-                    <x-forms.paragraph-input name="body" value="">Body</x-forms.paragraph-input>
+                    <x-forms.input name="title" value="{{ old('title', $post->title) }}">Title</x-forms.input>
+                    <x-forms.paragraph-input name="body" value="{{ old('body', $post->body) }}">Body</x-forms.paragraph-input>
                 </div>
             </div>
 
@@ -21,8 +19,9 @@
                     </div>
                 </fieldset>
             </div>
-            <x-forms.submit-button>Create Post</x-forms.submit-button>
+            <x-forms.submit-button>Make Changes</x-forms.submit-button>
         </div>
 
     </x-forms.form>
 </x-layout>
+
