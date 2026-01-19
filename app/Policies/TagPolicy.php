@@ -2,26 +2,26 @@
 
 namespace App\Policies;
 
-use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class PostPolicy
+class TagPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return false;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Post $post): bool
+    public function view(User $user, Tag $tag): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -29,30 +29,29 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        dd('hit create policy');
-        return $user->hasVerifiedEmail();
+        return false;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Post $post): bool
+    public function update(User $user, Tag $tag): bool
     {
-        return $user->id === $post->user_id;
+        return false;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Post $post): bool
+    public function delete(User $user, Tag $tag): bool
     {
-        return $user->id === $post->user_id;
+        return false;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Post $post): bool
+    public function restore(User $user, Tag $tag): bool
     {
         return false;
     }
@@ -60,7 +59,7 @@ class PostPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Post $post): bool
+    public function forceDelete(User $user, Tag $tag): bool
     {
         return false;
     }

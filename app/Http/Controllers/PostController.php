@@ -12,7 +12,7 @@ use Illuminate\Validation\Rule;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::latest()->with('author')->simplePaginate(10);
+        $posts = Post::latest()->with('author')->paginate(15);
         return view('posts.index', ['posts' => $posts]);
     }
 

@@ -6,6 +6,13 @@
                 <p class="text-lg">By: {{ $post->author->name  }}</p>
             </div>
             <h2 class="text-lg">{{ $post->body  }}</h2>
+
+            <div class="justify-self-start">
+                @foreach ($post->tags as $tag)
+                    <x-tag :$tag/>
+                @endforeach
+            </div>
+
         </div>
         @can('update', $post)
             <x-forms.edit-button :$post>Edit</x-forms.edit-button>           

@@ -5,7 +5,7 @@
         <x-forms.divider/>
 
         <x-forms.title>Name</x-forms.title>
-        <x-forms.input name="name" value=""></x-forms.input>
+        <x-forms.input name="name" value="{{ old('name')  }}"></x-forms.input>
 
         <x-forms.title>Email</x-forms.title>
         <x-forms.input name="email" type="email" value="{{ old('email') }}"/>

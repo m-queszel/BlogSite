@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -16,6 +17,8 @@ Route::post('posts', [PostController::class, 'store'])->middleware(
 )->name('posts.store');
 
 Route::resource('posts', PostController::class, ['except' => ['index', 'store']])->middleware('auth');
+
+Route::get('tags/{tag:name}', TagController::class);
 
 Route::delete('/logout', [SessionController::class, 'destroy'])->middleware('auth');
 
