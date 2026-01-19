@@ -29,7 +29,6 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        dd('hit create policy');
         return $user->hasVerifiedEmail();
     }
 
