@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CommentPosted;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::latest()->with('author')->get();
+        $posts = Post::latest()->with('author')->simplePaginate(10);
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -26,7 +28,8 @@ class PostController extends Controller
             'notify' => ['required', 'bool']
         ]);
 
-        Auth::user()->posts()->create($attributes);
+        $post = Auth::user()->posts()->create($attributes);
+        Mail::to(Auth::user())->send(new CommentPosted($post));
         return redirect()->route('home');
     }
 
