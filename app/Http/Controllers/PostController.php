@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\CommentPosted;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,12 +30,12 @@ class PostController extends Controller
         ]);
 
         $post = Auth::user()->posts()->create($attributes);
-        Mail::to(Auth::user())->send(new CommentPosted($post));
+        // Mail::to(Auth::user())->send(new CommentPosted($post));
         return redirect()->route('home');
     }
 
     public function show(Post $post){
-        return view('posts.show', ['post' => $post]);
+        return view('posts.show', ['post' => $post, 'comment' => Comment::class]);
     }
     
     public function edit(Post $post){

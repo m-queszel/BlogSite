@@ -19,15 +19,12 @@ class UserSeeder extends Seeder
     {
         $tags = Tag::factory()->count(5)->create();
 
+
         User::factory()->count(50)->has(
             Post::factory(3)->afterCreating(function ($post) use ($tags) {
-                // Randomize tag count (between 0 and 5)
-                $count = rand(0, 5);
-                if ($count > 0) {
-                    // Get random tags
-                    $randomTags = $tags->random($count);
-                    $post->tags()->attach($randomTags);
-                }
+                $count = rand(1, 5);
+                $randomTags = $tags->random($count);
+                $post->tags()->attach($randomTags);
             })
         )->create();
     }
