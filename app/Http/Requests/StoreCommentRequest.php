@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCommentRequest extends FormRequest
@@ -24,8 +23,8 @@ class StoreCommentRequest extends FormRequest
     {
         return [
             'post_id' => ['required'],
-            'user_id' => ['required', 'max:255'],
-            'body' => ['required', 'max:255']
+            'user_id' => ['required'],
+            'body' => ['required', 'max:255'],
         ];
     }
 }

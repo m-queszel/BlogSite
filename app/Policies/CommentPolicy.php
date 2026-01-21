@@ -46,7 +46,7 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment): bool
     {
-        return false;
+        return $user->can('update', $comment->parentPost) || $comment->user->id === $user->id;
     }
 
     /**

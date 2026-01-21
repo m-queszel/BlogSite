@@ -13,10 +13,9 @@
                 @endforeach
             </div>
         </div>
-        <div class="mt-2 flex gap-3">
+        <div class="mt-2 ml-2 flex gap-3">
             <div>
-                │<br>│
-                └──
+               │<br>│<br>└──>
             </div>
             <x-forms.form class="w-full" method="POST" action="{{ route('comment.store', $post->id)  }}">
                 <x-forms.paragraph-input name="body" value=""/>
@@ -24,6 +23,21 @@
                 <input name="user_id" value="{{ Auth::user()->id }}" class="hidden" />
                 <x-forms.submit-button :hasCancel="true" :isComment="true" post="{{ $post->id }}">Post</x-forms.submit-button>
             </x-forms.form>
+        </div>
+
+        <div>
+            <h1 class='text-2xl'>Comments</h1>
+            @foreach ($post->comments as $comment)
+            <div class="mt-5 ml-2 flex gap-3">
+                <div>
+                    │<br>│<br>└──>
+                </div>
+                <div class="flex border rounded-xl flex-col p-2 w-full mt-5 hover:border-orange-500">
+                        <h4>{{ $comment->user?->name  }}</h4>
+                        <p>{{ $comment->body  }}</p>
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
 </x-layout>

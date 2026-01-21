@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Mail\CommentPosted;
 use App\Models\Comment;
 use App\Models\Post;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -30,8 +32,13 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request, Post $post)
     {
-        $attributes = $request->validate($request->rules());
+        $attributes = $request->validated();
         $comment = $post->comments()->create($attributes);
+
+        if ($post->notify === 1) {
+            Mail::to($post->author->email)->send(new CommentPosted($post));
+        }
+
         return redirect()->route('posts.show', $post);
     }
 
@@ -64,6 +71,10 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        auth()->user()->can('delete', $comment);
+        $post = $comment->parentPost;
+        $comment->delete();
+
+        return redirect(route('posts.show', $post->id));
     }
 }

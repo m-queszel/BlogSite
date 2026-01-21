@@ -16,8 +16,8 @@
                     <legend class="text-lg font-semibold text-white">Notifications For Your Post</legend>
                     <p class="mt-1 text-lg text-gray-400">These are delivered via email.</p>
                     <div class="mt-6 space-y-6">
-                        <x-forms.radio-button id="enabled" value="enabled">Enable Notifications</x-forms.radio-button>
-                        <x-forms.radio-button id="disabled">Disable Notifications</x-forms.radio-button>
+                        <x-forms.radio-button id="enabled" value="1" :checked="$post->notify == 1">Enable Notifications</x-forms.radio-button>
+                        <x-forms.radio-button id="disabled" value="0" :checked="$post->notify == 0">Disable Notifications</x-forms.radio-button>
                     </div>
                 </fieldset>
             </div>

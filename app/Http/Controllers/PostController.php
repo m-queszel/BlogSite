@@ -5,59 +5,72 @@ namespace App\Http\Controllers;
 use App\Mail\CommentPosted;
 use App\Models\Comment;
 use App\Models\Post;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $posts = Post::latest()->with('author')->paginate(15);
+
         return view('posts.index', ['posts' => $posts]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('posts.create', []);
     }
 
-    public function store(){
+    public function store()
+    {
+
 
         $attributes = request()->validate([
             'title' => ['required', 'max:255'],
             'body' => ['required', 'max:255'],
-            'notify' => ['required', 'bool']
+            'notify' => ['required', 'boolean'],
         ]);
 
         $post = Auth::user()->posts()->create($attributes);
+
         // Mail::to(Auth::user())->send(new CommentPosted($post));
         return redirect()->route('home');
     }
 
-    public function show(Post $post){
+    public function show(Post $post)
+    {
         return view('posts.show', ['post' => $post, 'comment' => Comment::class]);
     }
-    
-    public function edit(Post $post){
+
+    public function edit(Post $post)
+    {
         auth()->user()->can('update', $post);
+
         return view('posts.edit', ['post' => $post]);
     }
 
-    public function update(Post $post){
+    public function update(Post $post)
+    {
         request()->validate([
             'title' => ['required', 'min:3', 'max:50'],
             'body' => ['required', 'max:255'],
+            'notify' => ['required', 'boolean'],
         ]);
         $post->update([
             'title' => request('title'),
-            'body' => request('body')
+            'body' => request('body'),
+            'notify' => request('notify'),
         ]);
-        return redirect('/posts/' . $post->id);
+
+        return redirect('/posts/'.$post->id);
     }
-    
-    public function destroy(Post $post){
+
+    public function destroy(Post $post)
+    {
         auth()->user()->can('delete', $post);
         $post->delete();
+
         return redirect(route('home'));
     }
 }
