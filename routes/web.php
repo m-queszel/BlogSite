@@ -4,16 +4,17 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TagController;
+use App\Http\Middleware\author;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
-Route::resource('posts', PostController::class, ['except' => ['index', 'store']])->middleware('auth');
+Route::resource('posts', PostController::class, ['except' => ['index', 'store']])->middleware('auth', 'role:author');
 
 
-Route::get('/posts/{post}/comment/create', [CommentController::class, 'create'])->name('comment.create');
+Route::get('/posts/{post}/comment/create', [CommentController::class, 'create'])->middleware('role:author')->name('comment.create');
 
 Route::delete('/logout', [SessionController::class, 'destroy'])->middleware('auth');
 Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->middleware('auth');

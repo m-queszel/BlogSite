@@ -11,3 +11,5 @@ After cloning the repository, start the docker containers by running
 You can now access via http://localhost:8080
 
 When changing the docker yaml file, recompile the image using `docker build -t blogsite:latest .` and then run it using `docker build -t blogsite:latest`
+
+To get the mailing services working, run `mailhog`

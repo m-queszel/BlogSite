@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCommentRequest;
 use App\Mail\CommentPosted;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Notifications\CommentPosted as NotificationsCommentPosted;
 use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
@@ -36,7 +37,8 @@ class CommentController extends Controller
         $comment = $post->comments()->create($attributes);
 
         if ($post->notify === 1) {
-            Mail::to($post->author->email)->send(new CommentPosted($post));
+            $post->author->notify(new NotificationsCommentPosted($post));
+            // Mail::to($post->author->email)->queue(new CommentPosted($post));
         }
 
         return redirect()->route('posts.show', $post);

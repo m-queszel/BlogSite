@@ -29,7 +29,7 @@ class CommentPolicy
     public function create(User $user): bool
     {
 
-        return $user->hasVerifiedEmail();
+        return $user->hasVerifiedEmail() || $user->admin;
 
     }
 

@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Post extends Model
 {
     protected $guarded = [];
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     public function author(){
         return $this->belongsTo(User::class, 'user_id');
