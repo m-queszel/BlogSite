@@ -13,8 +13,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->with('author')->paginate(15);
-
-        return view('posts.index', ['posts' => $posts]);
+        return view('posts.index',[
+            'posts' => $posts,
+        ]);
     }
 
     public function create()

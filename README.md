@@ -10,6 +10,7 @@ After cloning the repository, start the docker containers by running
 
 You can now access via http://localhost:8080
 
-When changing the docker yaml file, recompile the image using `docker build -t blogsite:latest .` and then run it using `docker build -t blogsite:latest`
+When changing the docker yaml file, recompile the image using `docker build -t blogsite:latest .` and then run it by bringing down the container `down-compose down` and then loading it back up again `docker-compose up -d` (these last two steps can also be done from within the docker desktop app by just stopping and restarting the container).
 
-To get the mailing services working, run `mailhog`
+To run jobs in the queue, use: `docker-compose exec app php artisan queue work` to run the queue from within the docker container.
+
