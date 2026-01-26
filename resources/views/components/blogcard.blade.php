@@ -3,7 +3,10 @@
 <div class="flex border rounded-xl flex-col p-2 w-full hover:border-orange-500">
     <a href="/posts/{{ $post['id'] }}">
         <div class="border-b">
-            <h2 class="text-4xl">{{ $post->title  }}</h2>
+            <div class="justify-between flex-row flex">
+                <h2 class="text-4xl">{{ $post->title  }}</h2>
+                <p>Category: {{ $post->category->name }}</p>
+            </div>
             <p class="text-lg">By: {{ $post->author->name  }}</p>
         </div>
         <h2 class="text-lg">{{ $post->body  }}</h2>

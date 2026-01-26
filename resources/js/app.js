@@ -1,4 +1,3 @@
-import './bootstrap';
 
 // Get the button and menu elements
 const notificationButton = document.getElementById('notification-button');

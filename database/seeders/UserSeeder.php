@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
@@ -17,6 +18,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $categories = Category::factory()->count(5)->create();
         $tags = Tag::factory()->count(5)->create();
 
 

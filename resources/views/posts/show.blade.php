@@ -2,7 +2,10 @@
     <div class="px-25">
         <div href="/posts/{{ $post['id'] }}" class="flex border rounded-xl flex-col p-2 w-full hover:border-orange-500">
             <div class="border-b">
+            <div class="justify-between flex-row flex">
                 <h2 class="text-4xl">{{ $post->title  }}</h2>
+                <p>Category: {{ $post->category->name }}</p>
+            </div>
                 <p class="text-lg">By: {{ $post->author->name  }}</p>
             </div>
             <h2 class="text-lg">{{ $post->body  }}</h2>
@@ -35,7 +38,7 @@
                         <p>{{ $comment->body  }}</p>
                         @can('delete', $comment)
                             <div class="flex justify-end">
-                                <button 
+                                <button
                                 form="delete-form"
                                 class="bg-red-500 hover:bg-red-600 rounded-2xl px-3 py-1 cursor-pointer"
                                 :$post
